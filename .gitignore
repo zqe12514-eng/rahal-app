@@ -10,18 +10,9 @@ desktop.ini
 .env
 
 # Logs
-*.log# VS Code settings
-.vscode/
-
-# System files
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Env / secrets
-.env
-
-# Logs
 *.log
 
-# Optional: اترك ملفات README-V*.md إذا أردت الاحتفاظ بتاريخ الإصدارات
+# Ignore old README versions
+README-V*.md
+!README-V38-GOOGLE-MAPS.md
+!README-V65.1-PROJECT-RESTORE.md
