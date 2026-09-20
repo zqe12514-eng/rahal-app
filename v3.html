@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+ <head><script id="rahal-theme-early">(function(){try{var t=localStorage.getItem("rahal-theme");document.documentElement.classList.toggle("light",t==="light");}catch(e){}})();</script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="#111827" name="theme-color"/>
+  <link href="manifest.json" rel="manifest"/>
+  <title>
+   Rahal Explorer V3 — Smart Travel
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+  <script src="features-v3.js">
+  </script>
+  <script defer="" src="app.js">
+  </script>
+  <style>
+   *{box-sizing:border-box}body{margin:0;font-family:system-ui,Tahoma,Arial;background:#f5f7fb;color:#172033}
+.wrap{max-width:1250px;margin:auto;padding:22px}.hero{padding:34px;border-radius:28px;background:linear-gradient(135deg,#111827,#2563eb,#7c3aed);color:white;box-shadow:0 20px 55px #0002}
+.hero h1{font-size:42px;margin:8px 0}.hero p{line-height:1.9;max-width:800px;opacity:.92}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:7px 12px;border:1px solid #ffffff33;background:#ffffff18;border-radius:999px;font-size:13px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.btn{border:0;border-radius:12px;padding:11px 15px;background:#2563eb;color:white;text-decoration:none;cursor:pointer;font-weight:700}.light{background:#ffffff;color:#172033}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:18px}.card{background:white;border:1px solid #e6eaf0;border-radius:20px;padding:20px;box-shadow:0 8px 28px #1018280b}.icon{font-size:30px}.card h3{margin:9px 0}.muted{color:#667085;line-height:1.7;font-size:14px}.stat{font-size:30px;font-weight:800}.bar{height:9px;background:#e9edf5;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#2563eb,#7c3aed)}
+.section{margin-top:30px}.section h2{margin-bottom:5px}.form{display:grid;gap:9px}.form input,.form select{padding:12px;border:1px solid #dfe4ec;border-radius:11px;font:inherit}.result{margin-top:12px;padding:12px;border-radius:12px;background:#f1f5ff}.ach{display:flex;gap:8px;flex-wrap:wrap}.ach span{padding:8px 11px;border-radius:12px;background:#f2f4f7}
+  </style>
+ <script src="auth.js"></script><script defer src="auth-ui.js"></script></head>
+ <body>
+  <main class="wrap">
+   <section class="hero">
+    <div class="chips">
+     <span class="chip">
+      Rahal Explorer V3
+     </span>
+     <span class="chip">
+      PWA
+     </span>
+     <span class="chip">
+      Offline
+     </span>
+     <span class="chip">
+      GPS
+     </span>
+     <span class="chip">
+      Smart Travel
+     </span>
+    </div>
+    <h1>
+     رحّال Explorer 🌍
+    </h1>
+    <p>
+     منصة سياحية ذكية للتخطيط والاستكشاف وإدارة الميزانية والتوصيات والطقس والخريطة والصور والإنجازات.
+    </p>
+    <div class="actions">
+     <a class="btn light" href="index.html">
+      🏠 التطبيق
+     </a>
+     <a class="btn light" href="places.html">
+      🗺️ استكشف
+     </a>
+     <a class="btn light" href="trips.html">
+      ✈️ الرحلات
+     </a>
+     <a class="btn light" href="map.html">
+      📍 الخريطة
+     </a>
+    </div>
+   </section>
+   <section class="section">
+    <h2>
+     📊 لوحة الرحّال
+    </h2>
+    <div class="grid">
+     <div class="card">
+      <div class="icon">
+       🏆
+      </div>
+      <h3>
+       المستوى
+      </h3>
+      <div class="stat" id="level">
+       -
+      </div>
+      <div class="bar">
+       <i id="bar">
+       </i>
+      </div>
+      <small id="score">
+      </small>
+     </div>
+     <div class="card">
+      <div class="icon">
+       ❤️
+      </div>
+      <h3>
+       المفضلة
+      </h3>
+      <div class="stat" id="fav">
+       0
+      </div>
+      <small>
+       أماكن محفوظة
+      </small>
+     </div>
+     <div class="card">
+      <div class="icon">
+       📍
+      </div>
+      <h3>
+       تمت زيارتها
+      </h3>
+      <div class="stat" id="vis">
+       0
+      </div>
+      <small>
+       أماكن زرتها
+      </small>
+     </div>
+     <div class="card">
+      <div class="icon">
+       ✈️
+      </div>
+      <h3>
+       رحلاتي
+      </h3>
+      <div class="stat" id="trips">
+       0
+      </div>
+      <small>
+       خطط محفوظة
+      </small>
+     </div>
+    </div>
+   </section>
+   <section class="section">
+    <h2>
+     🤖 Rahal AI — مخطط الرحلة
+    </h2>
+    <div class="card">
+     <div class="form">
+      <label>
+       المدة (أيام)
+       <input id="days" min="1" type="number" value="3"/>
+      </label>
+      <label>
+       الميزانية
+       <input id="budget" min="0" type="number" value="50000"/>
+      </label>
+      <label>
+       الاهتمام
+       <select id="interest">
+        <option>
+         تاريخ
+        </option>
+        <option>
+         طبيعة
+        </option>
+        <option>
+         تصوير
+        </option>
+        <option>
+         عائلي
+        </option>
+        <option>
+         مغامرات
+        </option>
+       </select>
+      </label>
+      <button class="btn" onclick="makePlan()">
+       ✨ إنشاء خطة ذكية
+      </button>
+     </div>
+     <div class="result" hidden="" id="plan">
+     </div>
+    </div>
+   </section>
+   <section class="section">
+    <h2>
+     💰 Smart Budget
+    </h2>
+    <div class="card">
+     <div class="form">
+      <label>
+       الفندق
+       <input id="hotel" type="number" value="30000"/>
+      </label>
+      <label>
+       الطعام
+       <input id="food" type="number" value="15000"/>
+      </label>
+      <label>
+       المواصلات
+       <input id="transport" type="number" value="10000"/>
+      </label>
+      <label>
+       الأنشطة
+       <input id="activities" type="number" value="5000"/>
+      </label>
+      <button class="btn" onclick="calcBudget()">
+       احسب
+      </button>
+     </div>
+     <div class="result" hidden="" id="budgetResult">
+     </div>
+    </div>
+   </section>
+   <section class="section">
+    <h2>
+     🏆 الإنجازات
+    </h2>
+    <div class="card">
+     <div class="ach" id="ach">
+     </div>
+    </div>
+   </section>
+   <section class="section">
+    <h2>
+     🚀 جميع المميزات
+    </h2>
+    <div class="grid">
+     <div class="card">
+      <div class="icon">
+       🧠
+      </div>
+      <h3>
+       التوصيات الذكية
+      </h3>
+      <p class="muted">
+       تستفيد من المفضلة والزيارات لإظهار أماكن جديدة.
+      </p>
+      <button class="btn" onclick="recommendMe()">
+       اقترح لي
+      </button>
+     </div>
+     <div class="card">
+      <div class="icon">
+       📸
+      </div>
+      <h3>
+       AI Camera
+      </h3>
+      <p class="muted">
+       واجهة تصوير جاهزة لربط التعرف على المعالم.
+      </p>
+      <button class="btn" onclick="camera()">
+       فتح الكاميرا
+      </button>
+     </div>
+     <div class="card">
+      <div class="icon">
+       🌦️
+      </div>
+      <h3>
+       Smart Weather
+      </h3>
+      <p class="muted">
+       الطقس مع نصيحة مناسبة للزيارة.
+      </p>
+      <button class="btn" onclick="weather()">
+       نصيحة الطقس
+      </button>
+     </div>
+     <div class="card">
+      <div class="icon">
+       🚨
+      </div>
+      <h3>
+       Travel Safety
+      </h3>
+      <p class="muted">
+       وصول سريع لقسم الأمان والخدمات المهمة.
+      </p>
+      <a class="btn" href="map.html">
+       فتح الخريطة
+      </a>
+     </div>
+     <div class="card">
+      <div class="icon">
+       📶
+      </div>
+      <h3>
+       Offline
+      </h3>
+      <p class="muted">
+       فحص حالة الاتصال واستخدام البيانات المحلية.
+      </p>
+      <button class="btn" onclick="alert(navigator.onLine?'🌐 متصل':'📶 Offline')">
+       فحص الاتصال
+      </button>
+     </div>
+     <div class="card">
+      <div class="icon">
+       📊
+      </div>
+      <h3>
+       Tourism Intelligence
+      </h3>
+      <p class="muted">
+       تحليل النشاط والزيارات والمفضلة.
+      </p>
+      <a class="btn" href="statistics.html">
+       الإحصائيات
+      </a>
+     </div>
+    </div>
+   </section>
+  </main>
+  <script>
+   function refresh(){
+ const s=RahalV3.score();document.getElementById('level').textContent=RahalV3.level();
+ document.getElementById('score').textContent=s+' نقطة';document.getElementById('bar').style.width=(s%100)+'%';
+ document.getElementById('fav').textContent=RahalV3.favorites().length;
+ document.getElementById('vis').textContent=RahalV3.visited().length;
+ document.getElementById('trips').textContent=RahalV3.trips().length;
+ document.getElementById('ach').innerHTML=RahalV3.achievementList().map(a=>'<span>'+a[0]+' '+a[1]+(a[2]?' ✅':' 🔒')+'</span>').join('');
+}
+function makePlan(){
+ const d=+days.value,b=+budget.value,i=interest.value;
+ const t=RahalV3.addTrip({name:'رحلة '+i+' الذكية',days:d,budget:b,interest:i});
+ plan.hidden=false;plan.innerHTML='<b>🤖 تم إنشاء الخطة:</b><br>المدة: '+d+' أيام<br>الميزانية: '+b.toLocaleString()+'<br>الاهتمام: '+i+'<br><br>تم حفظ الرحلة محليًا. افتح صفحة الرحلات لتعديلها.';
+ refresh();
+}
+function calcBudget(){
+ const b=+budget.value,total=[hotel,food,transport,activities].reduce((s,x)=>s+(+x.value||0),0);
+ budgetResult.hidden=false;budgetResult.innerHTML='<b>الإجمالي:</b> '+total.toLocaleString()+'<br><b>الميزانية:</b> '+b.toLocaleString()+'<br><b>المتبقي:</b> '+(b-total).toLocaleString()+(total>b?' ⚠️ تجاوزت الميزانية':' ✅ ضمن الميزانية');
+}
+function recommendMe(){
+ const list=RahalV3.recommend(allDestinations());
+ const box=document.getElementById('plan');
+ box.hidden=false;
+ box.innerHTML='<b>🧠 اقتراحات رحّال:</b><br>'+ (list.length?list.map(d=>`<a href="details.html?id=${encodeURIComponent(d.id)}">${d.flag} ${d.city}</a>`).join(' · '):'لا توجد اقتراحات جديدة بعد. أضف وجهات إلى المفضلة أو سجل زياراتك أولًا.');
+}
+async function camera(){
+ const x=document.createElement('input');x.type='file';x.accept='image/*';x.capture='environment';
+ x.onchange=async()=>{const f=x.files?.[0];if(!f)return;const r=new FileReader();r.onload=async()=>{await RahalDevice.savePhoto(r.result);alert('📸 تم حفظ الصورة في صور رحلاتي.');};r.readAsDataURL(f)};
+ x.click();
+}
+async function weather(){
+ const d=allDestinations()[0];
+ try{const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lng}&current=temperature_2m,wind_speed_10m&timezone=auto`);
+ const w=await r.json(); const c=w.current; plan.hidden=false; plan.innerHTML=`<b>🌦️ الطقس في ${d.city}</b><br>الحرارة: ${c.temperature_2m}°${w.current_units?.temperature_2m||'C'}<br>الرياح: ${c.wind_speed_10m} ${w.current_units?.wind_speed_10m||'كم/س'}<br>نصيحة: ${c.temperature_2m>35?'تجنب أوقات الظهيرة واشرب الماء.':c.temperature_2m<15?'خذ ملابس دافئة.':'الجو مناسب للزيارة.'}`;
+ }catch(e){plan.hidden=false;plan.textContent='تعذر جلب الطقس الآن. تحقق من الاتصال بالإنترنت.';}
+}
+refresh();
+  </script>
+ </body>
+</html>
+

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+ <head><script id="rahal-theme-early">(function(){try{var t=localStorage.getItem("rahal-theme");document.documentElement.classList.toggle("light",t==="light");}catch(e){}})();</script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="#0788c8" name="theme-color"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="style.css" rel="stylesheet"/>
+  <script defer="" src="app.js">
+  </script>
+  <title>
+   الإحصائيات — رحّال Explorer
+  </title>
+  <script src="features-v3.js">
+  </script>
+ <script src="auth.js"></script><script defer src="auth-ui.js"></script></head>
+ <body>
+<aside class="sidebar">
+   <div class="brand">
+    <div class="logo">
+     🧭
+    </div>
+    <div>
+     <h2>
+      رحّال Explorer
+     </h2>
+     <small>
+      منصة السفر الذكية
+     </small>
+    </div>
+   </div>
+   <nav class="nav">
+    <a class="" href="index.html">
+     <i>
+      ⌂
+     </i>
+     <span>
+      الرئيسية
+     </span>
+    </a>
+    <a class="" href="map.html">
+     <i>
+      ⌖
+     </i>
+     <span>
+      الخريطة
+     </span>
+    </a>
+    <a class="" href="places.html">
+     <i>
+      ◉
+     </i>
+     <span>
+      المواقع السياحية
+     </span>
+    </a>
+    <a class="" href="trips.html">
+     <i>
+      ✈
+     </i>
+     <span>
+      رحلاتي
+     </span>
+    </a>
+    <a class="" href="favorites.html">
+     <i>
+      ♡
+     </i>
+     <span>
+      المفضلة
+     </span>
+    </a>
+    <a class="" href="photos.html">
+     <i>
+      ▧
+     </i>
+     <span>
+      الصور
+     </span>
+    </a>
+    <a class="active" href="statistics.html">
+     <i>
+      ▥
+     </i>
+     <span>
+      الإحصائيات
+     </span>
+    </a>
+    <a class="" href="settings.html">
+     <i>
+      ⚙
+     </i>
+     <span>
+      الإعدادات
+     </span>
+    </a>
+    <a class="" href="admin.html">
+     <i>
+      ⚡
+     </i>
+     <span>
+      الإدارة
+     </span>
+    </a>
+   </nav>
+  </aside>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <main class="main">
+   <header class="topbar"><button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button><a class="account-avatar-btn" data-account-link href="profile.html" aria-label="الحساب" title="الحساب"><span data-account-avatar>👤</span></a>
+    <input class="search" data-search="" placeholder="ابحث عن مدينة أو وجهة..."/>
+    <div class="actions">
+     <button class="circle" id="themeBtn">
+      ☼
+     </button>
+     <button class="circle" id="notifyBtn">
+      🔔
+     </button>
+     <span>
+      زكريا
+     </span>
+    </div>
+   </header>
+   <section class="content">
+    <h1>
+     📊 الإحصائيات
+    </h1>
+    <div class="stats">
+     <div class="stat">
+      الوجهات
+      <b id="sDest">
+       0
+      </b>
+     </div>
+     <div class="stat">
+      المفضلة
+      <b id="sFav">
+       0
+      </b>
+     </div>
+     <div class="stat">
+      تمت زيارتها
+      <b id="sVisit">
+       0
+      </b>
+     </div>
+     <div class="stat">
+      الرحلات
+      <b id="sTrips">
+       0
+      </b>
+     </div>
+    </div>
+    <br/>
+    <div class="panel">
+     <h3>
+      ملخص الاستخدام
+     </h3>
+     <p>
+      الإحصائيات مبنية على البيانات المحفوظة في جهازك.
+     </p>
+     <div id="summary">
+     </div>
+    </div>
+    <script>
+     document.addEventListener("DOMContentLoaded",()=>{sDest.textContent=allDestinations().length;sFav.textContent=getFav().length;sVisit.textContent=getVisited().length;sTrips.textContent=getTrips().length;summary.innerHTML=`نسبة الوجهات التي تمت زيارتها: <b>${allDestinations().length?Math.round(getVisited().length/allDestinations().length*100):0}%</b>`})
+    </script>
+   </section>
+  </main>
+ <script defer src="drawer-nav.js"></script></body>
+</html>
+

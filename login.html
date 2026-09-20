@@ -1,0 +1,16 @@
+<!doctype html><html dir="rtl" lang="ar"><head><script id="rahal-theme-early">(function(){try{var t=localStorage.getItem("rahal-theme");document.documentElement.classList.toggle("light",t==="light");}catch(e){}})();</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0788c8"><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="style.css"><script src="auth.js"></script><title>تسجيل الدخول — رحّال</title><style id="rahal-login-fix">
+.login-page img,.auth-page img{max-width:100%;object-fit:cover}
+.login-logo,.auth-logo{display:block;margin:0 auto 12px;border-radius:18px}
+.auth-card,.login-card{overflow:hidden}
+input[type="text"],input[type="email"],input[type="tel"],input[type="password"]{appearance:none;-webkit-appearance:none}
+</style>
+</head>
+<body class="auth-page">
+<main class="auth-shell"><section class="auth-visual"><div class="auth-brand"><span>🧭</span><b>رحّال</b></div><div><small>اكتشف .. استكشف .. سافر</small><h1>رحلتك تبدأ من هنا.</h1><p>سجّل دخولك لحفظ وجهاتك ورحلاتك وإعداداتك على جهازك.</p></div><a href="welcome.html" class="auth-back">← العودة إلى رحّال</a></section>
+<section class="auth-card"><div class="auth-logo">🧭</div><h2>تسجيل الدخول</h2><p class="auth-muted">أدخل بيانات حسابك للمتابعة</p><form id="loginForm" class="auth-form"><label>البريد الإلكتروني أو رقم الهاتف<input id="loginContact" required autocomplete="username" placeholder="example@email.com"></label><label>كلمة المرور<div class="password-field"><input id="loginPassword" required type="password" minlength="6" autocomplete="current-password" placeholder="••••••••"><button type="button" data-toggle-password="loginPassword">👁</button></div></label><div class="auth-row"><label class="check"><input id="remember" type="checkbox" checked> تذكرني</label><a href="forgot.html">نسيت كلمة المرور؟</a></div><button class="auth-primary" type="submit">تسجيل الدخول</button></form><div class="auth-divider"><span>أو</span></div><button class="google-btn" id="googleLogin" type="button">G <span>المتابعة بحساب Google</span></button><p class="auth-switch">ليس لديك حساب؟ <a href="signup.html">إنشاء حساب جديد</a></p><p class="auth-guest"><a href="index.html" id="guestLogin">متابعة بدون حساب</a></p></section></main>
+<script>
+const form=document.getElementById('loginForm');
+form.addEventListener('submit',async e=>{e.preventDefault();const a=RahalAuth.account();const contact=RahalAuth.normalize(document.getElementById('loginContact').value);const pass=document.getElementById('loginPassword').value;if(!a){RahalAuth.notify('لا يوجد حساب على هذا الجهاز. أنشئ حسابًا أولًا.');return}if(RahalAuth.normalize(a.contact)!==contact || a.passwordHash!==await RahalAuth.hash(pass)){RahalAuth.notify('بيانات الدخول غير صحيحة.');return}RahalAuth.setSession(true);location.href='profile.html'});
+document.querySelectorAll('[data-toggle-password]').forEach(b=>b.onclick=()=>{const i=document.getElementById(b.dataset.togglePassword);i.type=i.type==='password'?'text':'password'});
+document.getElementById('googleLogin').onclick=()=>RahalAuth.notify('تسجيل Google يحتاج ربط خدمة مصادقة حقيقية مثل Firebase أو Supabase.');
+</script></body></html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+ <head><script id="rahal-theme-early">(function(){try{var t=localStorage.getItem("rahal-theme");document.documentElement.classList.toggle("light",t==="light");}catch(e){}})();</script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="#0788c8" name="theme-color"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="style.css" rel="stylesheet"/>
+  <script defer="" src="app.js">
+  </script>
+  <title>
+   الرئيسية — رحّال Explorer
+  </title>
+  <script src="features-v3.js">
+  </script>
+ <script src="auth.js"></script><script defer src="auth-ui.js"></script></head>
+ <body>
+  <aside class="sidebar">
+   <div class="brand">
+    <div class="logo">
+     🧭
+    </div>
+    <div>
+     <h2>
+      رحّال Explorer
+     </h2>
+     <small>
+      منصة السفر الذكية
+     </small>
+    </div>
+   </div>
+   <nav class="nav">
+    <a class="active" href="index.html">
+     <i>
+      ⌂
+     </i>
+     <span>
+      الرئيسية
+     </span>
+    </a>
+    <a class="" href="map.html">
+     <i>
+      ⌖
+     </i>
+     <span>
+      الخريطة
+     </span>
+    </a>
+    <a class="" href="places.html">
+     <i>
+      ◉
+     </i>
+     <span>
+      المواقع السياحية
+     </span>
+    </a><a class="" href="services.html"><i>🏨</i><span>الإقامة والمطاعم</span></a>
+    <a class="" href="trips.html">
+     <i>
+      ✈
+     </i>
+     <span>
+      رحلاتي
+     </span>
+    </a>
+    <a class="" href="favorites.html">
+     <i>
+      ♡
+     </i>
+     <span>
+      المفضلة
+     </span>
+    </a>
+    <a class="" href="photos.html">
+     <i>
+      ▧
+     </i>
+     <span>
+      الصور
+     </span>
+    </a>
+    <a class="" href="statistics.html">
+     <i>
+      ▥
+     </i>
+     <span>
+      الإحصائيات
+     </span>
+    </a>
+    <a class="" href="settings.html">
+     <i>
+      ⚙
+     </i>
+     <span>
+      الإعدادات
+     </span>
+    </a>
+    <a class="" href="admin.html">
+     <i>
+      ⚡
+     </i>
+     <span>
+      الإدارة
+     </span>
+    </a>
+   </nav>
+  </aside>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <main class="main">
+   <header class="topbar"><button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button><a class="account-avatar-btn" data-account-link href="profile.html" aria-label="الحساب" title="الحساب"><span data-account-avatar>👤</span></a>
+    <input class="search" data-search="" placeholder="ابحث عن مدينة أو وجهة..."/>
+    <div class="actions">
+     <button class="circle" id="themeBtn">
+      ☼
+     </button>
+     <button class="circle" id="notifyBtn">
+      🔔
+     </button>
+     <span>
+      زكريا
+     </span>
+    </div>
+   </header>
+   <section class="content">
+    <section class="hero">
+     <small>
+      ✦ منصة استكشاف وسفر ذكية
+     </small>
+     <h1>
+      اكتشف اليمن، وخطّط رحلتك بذكاء.
+     </h1>
+     <p>
+      رحّال يساعدك على اكتشاف الوجهات السياحية في اليمن والعالم، ومعرفة الطقس والمسافات، وتحديد موقعك على الخريطة، واختيار وجهتك وتخطيط رحلتك بسهولة من مكان واحد.
+     </p>
+     <a class="btn primary" href="places.html">
+      🌍 ابدأ الاستكشاف
+     </a>
+     <a class="btn" href="trips.html">
+      ✈️ خطط رحلة
+     </a>
+     <button class="btn" data-gps="">
+      📍 موقعي
+     </button>
+    </section>
+    <div class="section">
+     <h2>
+      أماكن مقترحة لك
+     </h2>
+     <a href="places.html">
+      عرض الكل ←
+     </a>
+    </div>
+    <div class="grid" id="homeGrid">
+    </div>
+    <section class="panel weather-panel" id="weatherPanel">
+     <div class="section weather-section-title">
+      <div>
+       <h2>🌤️ الطقس</h2>
+       <span class="muted">توقعات واضحة لطقس موقعك ووجهتك.</span>
+      </div>
+      <button class="btn" id="weatherRefresh">تحديث</button>
+     </div>
+     <div id="weatherBox">جاري تحديد موقعك وجلب الطقس…</div>
+    </section>
+    <br/>
+    <section class="panel smart-panel">
+     <div class="section">
+      <div>
+       <h2>
+        🧭 خطط رحلتك بذكاء
+       </h2>
+       <p class="muted">
+        رحّال يقترح لك رحلة مناسبة لوقتك واهتماماتك، مع تركيز على الوجهات اليمنية.
+       </p>
+      </div>
+     </div>
+     <form class="form-grid" id="smartPlanForm">
+      <input max="14" min="1" name="days" placeholder="عدد الأيام" required="" type="number" value="2"/>
+      <select name="interest">
+       <option value="الكل">
+        أي اهتمام
+       </option>
+       <option value="طبيعة">
+        طبيعة
+       </option>
+       <option value="جبال">
+        جبال
+       </option>
+       <option value="بحر">
+        بحر
+       </option>
+       <option value="تراث">
+        تراث
+       </option>
+       <option value="تاريخ">
+        تاريخ
+       </option>
+      </select>
+      <button class="btn primary">
+       ✨ أنشئ لي رحلة
+      </button>
+     </form>
+     <div class="notice" id="smartPlanResult" style="margin-top:14px">
+أدخل عدد الأيام واهتمامك وسأبني لك اقتراحًا مبدئيًا.
+     </div>
+    </section>
+    <br/>
+    <div class="section">
+     <h2>
+      أقرب وجهة إليك
+     </h2>
+     <button class="btn primary" id="nearestBtn">
+      📍 احسب الأقرب
+     </button>
+    </div>
+    <div class="notice" id="nearestBox">
+     اسمح للموقع لمعرفة أقرب وجهة من بين جميع الوجهات.
+    </div>
+   </section>
+  </main>
+ <script defer src="drawer-nav.js"></script></body>
+<script>document.addEventListener('DOMContentLoaded',()=>{const logged=RahalAuth.account()&&RahalAuth.session();document.querySelectorAll('[data-account-link]').forEach(a=>{a.href=logged?'profile.html':'login.html';if(a.classList.contains('account-top-link'))a.textContent=logged?RahalAuth.account().name:'تسجيل الدخول'});});</script></html>
+

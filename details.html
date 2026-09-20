@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+ <head><script id="rahal-theme-early">(function(){try{var t=localStorage.getItem("rahal-theme");document.documentElement.classList.toggle("light",t==="light");}catch(e){}})();</script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="#0788c8" name="theme-color"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="style.css" rel="stylesheet"/>
+  <script defer="" src="app.js">
+  </script>
+  <title>
+   تفاصيل الوجهة — رحّال Explorer
+  </title>
+  <script src="features-v3.js">
+  </script>
+ <script src="auth.js"></script><script defer src="auth-ui.js"></script></head>
+ <body>
+<aside class="sidebar">
+   <div class="brand">
+    <div class="logo">
+     🧭
+    </div>
+    <div>
+     <h2>
+      رحّال Explorer
+     </h2>
+     <small>
+      منصة السفر الذكية
+     </small>
+    </div>
+   </div>
+   <nav class="nav">
+    <a class="" href="index.html">
+     <i>
+      ⌂
+     </i>
+     <span>
+      الرئيسية
+     </span>
+    </a>
+    <a class="" href="map.html">
+     <i>
+      ⌖
+     </i>
+     <span>
+      الخريطة
+     </span>
+    </a>
+    <a class="active" href="places.html">
+     <i>
+      ◉
+     </i>
+     <span>
+      المواقع السياحية
+     </span>
+    </a>
+    <a class="" href="trips.html">
+     <i>
+      ✈
+     </i>
+     <span>
+      رحلاتي
+     </span>
+    </a>
+    <a class="" href="favorites.html">
+     <i>
+      ♡
+     </i>
+     <span>
+      المفضلة
+     </span>
+    </a>
+    <a class="" href="photos.html">
+     <i>
+      ▧
+     </i>
+     <span>
+      الصور
+     </span>
+    </a>
+    <a class="" href="statistics.html">
+     <i>
+      ▥
+     </i>
+     <span>
+      الإحصائيات
+     </span>
+    </a>
+    <a class="" href="settings.html">
+     <i>
+      ⚙
+     </i>
+     <span>
+      الإعدادات
+     </span>
+    </a>
+    <a class="" href="admin.html">
+     <i>
+      ⚡
+     </i>
+     <span>
+      الإدارة
+     </span>
+    </a>
+   </nav>
+  </aside>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <main class="main">
+   <header class="topbar"><button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button><a class="account-avatar-btn" data-account-link href="profile.html" aria-label="الحساب" title="الحساب"><span data-account-avatar>👤</span></a>
+    <input class="search" data-search="" placeholder="ابحث عن مدينة أو وجهة..."/>
+    <div class="actions">
+     <button class="circle" id="themeBtn">
+      ☼
+     </button>
+     <button class="circle" id="notifyBtn">
+      🔔
+     </button>
+     <span>
+      زكريا
+     </span>
+    </div>
+   </header>
+   <section class="content">
+    <div class="panel" id="detail">
+     جارٍ تحميل الوجهة...
+    </div>
+    <script>
+     document.addEventListener("DOMContentLoaded",()=>{const id=new URLSearchParams(location.search).get("id"),d=allDestinations().find(x=>x.id===id);if(!d)return detail.innerHTML="<h2>الوجهة غير موجودة</h2>";detail.innerHTML=`<img src="${d.img}" style="width:100%;max-height:430px;object-fit:cover;border-radius:15px"><h1>${d.flag} ${d.city}</h1><p class="muted">${d.country} · ${d.cat} · ⭐ ${d.rating} · 🎯 ملاءمة الرحلة ${smartDestinationScore(d)}%</p><p>${d.desc}</p><div id="destinationWeather" class="panel" style="margin:14px 0"><b>🌤️ طقس الوجهة</b><div class="muted">جارٍ تحميل الطقس...</div></div>${destinationIntel(d)}<button class="btn primary" onclick="toggleFavorite('${d.id}');toast('تم تحديث المفضلة')">❤️ مفضلة</button> <a class="btn" href="map.html?lat=${d.lat}&lng=${d.lng}">🗺️ عرض على الخريطة</a> <button class="btn" onclick="share(${JSON.stringify(d).replace(/"/g,'&quot;')})">↗ مشاركة</button>`
+const wb=document.getElementById("destinationWeather");
+if(wb){
+ const loadWeather=async()=>{
+  wb.innerHTML='<b>🌤️ طقس الوجهة</b><p class="muted">جاري تحديث الطقس...</p>';
+  try{
+   const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lng}&current=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=1&timezone=auto`,{cache:'no-store'});
+   if(!r.ok)throw new Error();
+   const w=await r.json(),c=w.current;
+   const labels={0:"☀️ صافي",1:"🌤️ غالبًا صافٍ",2:"⛅ غائم جزئيًا",3:"☁️ غائم",45:"🌫️ ضباب",48:"🌫️ ضباب",51:"🌦️ رذاذ",53:"🌦️ رذاذ",55:"🌦️ رذاذ",61:"🌧️ مطر",63:"🌧️ مطر",65:"🌧️ مطر غزير",71:"🌨️ ثلج",73:"🌨️ ثلج",75:"🌨️ ثلج غزير",80:"🌦️ زخات",81:"🌧️ زخات",82:"⛈️ زخات قوية",95:"⛈️ عواصف",96:"⛈️ عاصفة",99:"⛈️ عاصفة"};
+   const days=w.daily.time.map((x,i)=>`<div class="notice"><b>${x}</b> · ${labels[w.daily.weather_code[i]]||"🌤️"} · ${w.daily.temperature_2m_min[i]}°–${w.daily.temperature_2m_max[i]}° · المطر ${w.daily.precipitation_probability_max[i]||0}%</div>`).join('');
+   const updated=new Date().toLocaleTimeString('ar-YE',{hour:'numeric',minute:'2-digit'});
+   wb.innerHTML=`<h3>🌤️ طقس اليوم في ${d.city}</h3><p><b>${c.temperature_2m}°C</b> · محسوس ${c.apparent_temperature}°C · ${labels[c.weather_code]||"🌤️"} · رياح ${c.wind_speed_10m} كم/س</p><p class="muted">العظمى ${w.daily.temperature_2m_max[0]}° · الصغرى ${w.daily.temperature_2m_min[0]}° · احتمال المطر ${w.daily.precipitation_probability_max[0]||0}%</p><small class="muted">آخر تحديث: ${updated} · يتحدث تلقائيًا كل 10 دقائق</small>`;
+  }catch(e){wb.innerHTML='<b>🌤️ طقس الوجهة</b><p class="muted">تعذر تحديث الطقس حاليًا. سيحاول رحّال مرة أخرى تلقائيًا.</p>';}
+ };
+ loadWeather();
+ setInterval(()=>{if(document.visibilityState==='visible')loadWeather()},10*60*1000);
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')loadWeather()});
+}
+})
+    </script>
+   </section>
+  </main>
+ <script defer src="drawer-nav.js"></script></body>
+</html>
+

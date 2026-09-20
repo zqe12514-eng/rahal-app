@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head><script id="rahal-theme-early">(function(){try{var t=localStorage.getItem("rahal-theme");document.documentElement.classList.toggle("light",t==="light");}catch(e){}})();</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0788c8" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="auth.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="app.js"></script>
+  <script src="features-v3.js"></script>
+  <title>الإعدادات — رحّال Explorer</title>
+<style id="rahal-battery-modal">
+.rahal-modal[hidden]{display:none!important}.rahal-modal{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;padding:18px}.rahal-modal-backdrop{position:absolute;inset:0;background:rgba(7,27,43,.58);backdrop-filter:blur(4px)}.rahal-modal-card{position:relative;z-index:1;width:min(420px,100%);padding:28px;border-radius:24px;background:#fff;color:#17324a;box-shadow:0 24px 70px rgba(0,0,0,.3);text-align:center}.dark .rahal-modal-card{background:#102332;color:#eef7fb}.rahal-modal-close{position:absolute;top:12px;left:12px;width:38px;height:38px;border:0;border-radius:50%;background:#edf4f8;color:#17324a;font-size:18px;cursor:pointer}.battery-big-icon{font-size:54px;line-height:1;margin:4px 0 12px}.battery-modal-card h2{margin:0 0 8px}.battery-percent{font-size:52px;font-weight:900;line-height:1.1;margin:8px 0 18px}.battery-progress{height:18px;border-radius:99px;background:#e4edf2;overflow:hidden}.battery-progress span{display:block;height:100%;width:0;border-radius:99px;background:#1689e8;transition:width .3s ease}.battery-status{margin-top:15px;font-size:18px;font-weight:800}.battery-meta{margin-top:8px;color:#60798c;font-size:14px}.dark .battery-meta{color:#b4c7d3}
+</style>
+</head>
+<body class="settings-page">
+<aside class="sidebar">
+    <div class="brand">
+      <div class="logo">🧭</div>
+      <div>
+        <h2>رحّال Explorer</h2>
+        <small>منصة السفر الذكية</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="index.html"><i>⌂</i><span>الرئيسية</span></a>
+      <a href="map.html"><i>⌖</i><span>الخريطة</span></a>
+      <a href="places.html"><i>◉</i><span>المواقع السياحية</span></a>
+      <a href="trips.html"><i>✈</i><span>رحلاتي</span></a>
+      <a href="favorites.html"><i>♡</i><span>المفضلة</span></a>
+      <a href="photos.html"><i>▧</i><span>الصور</span></a>
+      <a href="statistics.html"><i>▥</i><span>الإحصائيات</span></a>
+      <a class="active" href="settings.html"><i>⚙</i><span>الإعدادات</span></a>
+      <a href="admin.html"><i>⚡</i><span>الإدارة</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <b>رحّال</b>
+      <span>اكتشف • خطط • استمتع</span>
+    </div>
+  </aside>
+
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <main class="main">
+    <header class="topbar settings-topbar"><button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button><a class="account-avatar-btn" data-account-link href="profile.html" aria-label="الحساب" title="الحساب"><span data-account-avatar>👤</span></a><div class="topbar-spacer"></div><div class="actions"><button class="circle" id="notifyBtn" title="الإشعارات">🔔</button><button class="circle" id="themeBtn" title="تبديل المظهر">☼</button></div></header>
+
+    <section class="content settings-content">
+      <div class="settings-heading">
+        <div>
+          <div class="settings-kicker">Rahal Explorer</div>
+          <h1>⚙️ الإعدادات</h1>
+          <p>خصّص تجربة رحّال حسب احتياجاتك، مع إبقاء بياناتك وإعداداتك على جهازك.</p>
+        </div>
+        <a class="back-link" href="index.html">‹ الرئيسية</a>
+      </div>
+
+      <div class="settings-stack">
+        <section class="settings-card">
+          <div class="setting-icon">🌐</div>
+          <div class="setting-main">
+            <h2>اللغة</h2>
+            <p>اختر اللغة المفضلة لواجهة التطبيق وأسماء الوجهات.</p>
+            <div class="setting-options two">
+              <button class="setting-choice active" id="langAr" type="button">العربية <span>🇸🇦</span></button>
+              <button class="setting-choice" id="langEn" type="button">English <span>🇬🇧</span></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-card">
+          <div class="setting-icon">☀️</div>
+          <div class="setting-main">
+            <h2>المظهر</h2>
+            <p>اختر نمط العرض المناسب لك.</p>
+            <div class="setting-options two">
+              <button class="setting-choice" id="lightMode" type="button">الوضع النهاري <span>☀️</span></button>
+              <button class="setting-choice" id="darkMode" type="button">الوضع الليلي <span>🌙</span></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-card">
+          <div class="setting-icon">📍</div>
+          <div class="setting-main">
+            <h2>الموقع والخريطة</h2>
+            <p>إعدادات الموقع والخريطة داخل رحّال.</p>
+            <div class="setting-options three">
+              <button class="setting-choice primary-choice" data-gps type="button">تحديد موقعي <span>🎯</span></button>
+              <a class="setting-choice" href="map.html">فتح الخريطة <span>🗺️</span></a>
+              <button class="setting-choice" id="mapTest" type="button">اختبار الموقع <span>📡</span></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-card">
+          <div class="setting-icon">🔔</div>
+          <div class="setting-main">
+            <div class="setting-title-row">
+              <div>
+                <h2>التنبيهات</h2>
+                <p>إدارة تنبيهات الرحلات والطقس والمواعيد.</p>
+              </div>
+              <label class="switch" aria-label="تفعيل التنبيهات">
+                <input id="notifySwitch" type="checkbox" />
+                <span></span>
+              </label>
+            </div>
+            <button class="setting-choice wide-choice" id="notifyBtn2" type="button">اختبار التنبيه <span>🔔</span></button>
+          </div>
+        </section>
+
+        <section class="settings-card">
+          <div class="setting-icon">📱</div>
+          <div class="setting-main">
+            <h2>التطبيق</h2>
+            <p>إعدادات رحّال الخاصة بجهازك.</p>
+            <div class="setting-options three">
+              <button class="setting-choice primary-choice install-choice" hidden id="installBtn" type="button">تثبيت رحّال على هذا الجهاز <span>⬇️</span></button><div id="installHelp" class="install-help" hidden></div>
+              <button class="setting-choice" id="shareBtn" type="button">مشاركة رحّال <span>↗️</span></button>
+              <button class="setting-choice" id="batteryBtn" type="button">معلومات البطارية <span>🔋</span></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-card">
+          <div class="setting-icon">💾</div>
+          <div class="setting-main">
+            <h2>البيانات</h2>
+            <p>إدارة بياناتك ونسخك الاحتياطية المخزنة محليًا.</p>
+            <div class="setting-options two">
+              <a class="setting-choice" href="admin.html">إدارة البيانات <span>⚙️</span></a>
+              <button class="setting-choice" id="backupInfo" type="button">حماية بياناتك <span>🔐</span></button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div id="batteryModal" class="rahal-modal" hidden role="dialog" aria-modal="true" aria-labelledby="batteryTitle">
+  <div class="rahal-modal-backdrop" data-battery-close></div>
+  <section class="rahal-modal-card battery-modal-card">
+    <button class="rahal-modal-close" type="button" data-battery-close aria-label="إغلاق">✕</button>
+    <div class="battery-big-icon">🔋</div>
+    <h2 id="batteryTitle">معلومات البطارية</h2>
+    <div class="battery-percent" id="batteryPercent">—%</div>
+    <div class="battery-progress"><span id="batteryProgress"></span></div>
+    <div class="battery-status" id="batteryStatus">جاري القراءة...</div>
+    <div class="battery-meta" id="batteryMeta"></div>
+  </section>
+</div>
+
+<footer class="settings-footer">
+        <span>رحّال Explorer</span>
+        <span>الإصدار V64.2</span>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const setTheme = (mode) => {
+        document.documentElement.classList.toggle('light', mode === 'light');
+        localStorage.setItem('rahal-theme', mode);
+        updateChoices();
+      };
+      const updateChoices = () => {
+        const currentLang = localStorage.getItem('rahal-language') || 'ar';
+        document.getElementById('langAr')?.classList.toggle('active', currentLang === 'ar');
+        document.getElementById('langEn')?.classList.toggle('active', currentLang === 'en');
+        const light = document.documentElement.classList.contains('light');
+        document.getElementById('lightMode')?.classList.toggle('active', light);
+        document.getElementById('darkMode')?.classList.toggle('active', !light);
+        const permission = ('Notification' in window && Notification.permission === 'granted');
+        const sw = document.getElementById('notifySwitch');
+        if (sw) sw.checked = permission;
+      };
+
+      document.getElementById('langAr')?.addEventListener('click', () => { localStorage.setItem('rahal-language', 'ar'); location.reload(); });
+      document.getElementById('langEn')?.addEventListener('click', () => { localStorage.setItem('rahal-language', 'en'); location.reload(); });
+      document.getElementById('lightMode')?.addEventListener('click', () => setTheme('light'));
+      document.getElementById('darkMode')?.addEventListener('click', () => setTheme('dark'));
+      document.getElementById('mapTest')?.addEventListener('click', () => {
+        if (navigator.geolocation) navigator.geolocation.getCurrentPosition(
+          p => toast(`تم اختبار الموقع: ${p.coords.latitude.toFixed(4)}, ${p.coords.longitude.toFixed(4)}`),
+          () => toast('تعذر الوصول للموقع؛ اسمح بالموقع من إعدادات المتصفح.'),
+          { enableHighAccuracy: true, timeout: 8000 }
+        );
+        else toast('المتصفح لا يدعم تحديد الموقع.');
+      });
+      document.getElementById('notifySwitch')?.addEventListener('change', async (e) => {
+        if (e.target.checked) {
+          try { await requestNotifications(); toast('تم تفعيل التنبيهات 🔔'); }
+          catch { e.target.checked = false; toast('لم يتم السماح بالتنبيهات.'); }
+        } else toast('يمكنك إيقاف التنبيهات من إعدادات المتصفح.');
+      });
+      document.getElementById('backupInfo')?.addEventListener('click', () => toast('بيانات رحّال المحلية لا تُرسل للخادم. يمكنك إدارتها من قسم الإدارة.'));
+      const n2 = document.getElementById('notifyBtn2');
+      const sh = document.getElementById('shareBtn');
+      const bat = document.getElementById('batteryBtn');
+      const ins = document.getElementById('installBtn');
+      if (n2) n2.onclick = notify;
+      if (sh) sh.onclick = async () => { RahalDevice.vibrate(20); const ok = await RahalDevice.share({title:'رحّال Explorer', text:'شارك رحلتك مع رحّال', url:location.href}); if (!ok) { try { await navigator.clipboard.writeText(location.href); toast('تم نسخ رابط رحّال'); } catch { toast('المشاركة غير متاحة'); } } };
+      if (bat) bat.onclick = async () => {
+  const modal=document.getElementById('batteryModal'),pct=document.getElementById('batteryPercent'),bar=document.getElementById('batteryProgress'),status=document.getElementById('batteryStatus'),meta=document.getElementById('batteryMeta');
+  if(!modal)return; modal.hidden=false; document.body.style.overflow='hidden';
+  try{
+    const b=await RahalDevice.battery();
+    if(!b){pct.textContent='—%';bar.style.width='0%';status.textContent=lang()==='en'?'Battery information is unavailable':'معلومات البطارية غير متاحة';meta.textContent=lang()==='en'?'Your browser does not expose battery status.':'المتصفح لا يتيح قراءة حالة البطارية.';return;}
+    const level=Math.max(0,Math.min(100,Math.round(b.level*100)));
+    pct.textContent=level+'%';bar.style.width=level+'%';
+    status.textContent=b.charging?(lang()==='en'?'⚡ Charging':'⚡ قيد الشحن'):(lang()==='en'?'🔋 On battery':'🔋 يعمل على البطارية');
+    meta.textContent=lang()==='en'?'Battery level from the device browser API.':'نسبة البطارية من واجهة الجهاز التي يوفرها المتصفح.';
+    const update=()=>{const n=Math.round(b.level*100);pct.textContent=n+'%';bar.style.width=n+'%';status.textContent=b.charging?(lang()==='en'?'⚡ Charging':'⚡ قيد الشحن'):(lang()==='en'?'🔋 On battery':'🔋 يعمل على البطارية')};
+    b.addEventListener?.('levelchange',update);b.addEventListener?.('chargingchange',update);
+  }catch{status.textContent=lang()==='en'?'Battery information is unavailable':'معلومات البطارية غير متاحة';meta.textContent=lang()==='en'?'Please use a browser that supports the Battery Status API.':'استخدم متصفحًا يدعم واجهة حالة البطارية.';}
+};
+document.querySelectorAll('[data-battery-close]').forEach(x=>x.addEventListener('click',()=>{const m=document.getElementById('batteryModal');if(m)m.hidden=true;document.body.style.overflow='';}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const m=document.getElementById('batteryModal');if(m&&!m.hidden){m.hidden=true;document.body.style.overflow='';}}});
+      window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); RahalDevice.installPrompt=e; if(ins){ins.hidden=false; ins.onclick=async()=>{const prompt=RahalDevice.installPrompt;if(!prompt){showInstallHelp();return;} prompt.prompt(); const choice=await prompt.userChoice; RahalDevice.installPrompt=null; if(choice?.outcome==='accepted'){ins.hidden=true; showInstallHelp('تم تثبيت رحّال بنجاح على جهازك ✅');} else {showInstallHelp('لم يتم التثبيت. يمكنك الضغط على الزر مرة أخرى عندما تريد.');}};}});
+window.addEventListener('appinstalled',()=>{if(ins)ins.hidden=true; showInstallHelp('تم تثبيت رحّال بنجاح على جهازك ✅');});
+function showInstallHelp(msg){const h=document.getElementById('installHelp');if(h){h.hidden=false;h.textContent=msg||'إذا لم يظهر التثبيت، افتح رحّال من Chrome أو Edge عبر localhost أو HTTPS ثم أعد المحاولة.';}}
+if(ins && !('BeforeInstallPromptEvent' in window)){setTimeout(()=>{if(!RahalDevice.installPrompt)showInstallHelp();},800);}
+      updateChoices();
+    });
+  </script>
+<script defer src="drawer-nav.js"></script></body>
+</html>

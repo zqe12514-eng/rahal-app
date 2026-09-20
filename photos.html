@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+ <head><script id="rahal-theme-early">(function(){try{var t=localStorage.getItem("rahal-theme");document.documentElement.classList.toggle("light",t==="light");}catch(e){}})();</script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="#0788c8" name="theme-color"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="style.css" rel="stylesheet"/>
+  <script defer="" src="app.js">
+  </script>
+  <title>
+   الصور — رحّال Explorer
+  </title>
+  <script src="features-v3.js">
+  </script>
+ <script src="auth.js"></script><script defer src="auth-ui.js"></script></head>
+ <body>
+<aside class="sidebar">
+   <div class="brand">
+    <div class="logo">
+     🧭
+    </div>
+    <div>
+     <h2>
+      رحّال Explorer
+     </h2>
+     <small>
+      منصة السفر الذكية
+     </small>
+    </div>
+   </div>
+   <nav class="nav">
+    <a class="" href="index.html">
+     <i>
+      ⌂
+     </i>
+     <span>
+      الرئيسية
+     </span>
+    </a>
+    <a class="" href="map.html">
+     <i>
+      ⌖
+     </i>
+     <span>
+      الخريطة
+     </span>
+    </a>
+    <a class="" href="places.html">
+     <i>
+      ◉
+     </i>
+     <span>
+      المواقع السياحية
+     </span>
+    </a>
+    <a class="" href="trips.html">
+     <i>
+      ✈
+     </i>
+     <span>
+      رحلاتي
+     </span>
+    </a>
+    <a class="" href="favorites.html">
+     <i>
+      ♡
+     </i>
+     <span>
+      المفضلة
+     </span>
+    </a>
+    <a class="active" href="photos.html">
+     <i>
+      ▧
+     </i>
+     <span>
+      الصور
+     </span>
+    </a>
+    <a class="" href="statistics.html">
+     <i>
+      ▥
+     </i>
+     <span>
+      الإحصائيات
+     </span>
+    </a>
+    <a class="" href="settings.html">
+     <i>
+      ⚙
+     </i>
+     <span>
+      الإعدادات
+     </span>
+    </a>
+    <a class="" href="admin.html">
+     <i>
+      ⚡
+     </i>
+     <span>
+      الإدارة
+     </span>
+    </a>
+   </nav>
+  </aside>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <main class="main">
+   <header class="topbar"><button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button><a class="account-avatar-btn" data-account-link href="profile.html" aria-label="الحساب" title="الحساب"><span data-account-avatar>👤</span></a>
+    <input class="search" data-search="" placeholder="ابحث عن مدينة أو وجهة..."/>
+    <div class="actions">
+     <button class="circle" id="themeBtn">
+      ☼
+     </button>
+     <button class="circle" id="notifyBtn">
+      🔔
+     </button>
+     <span>
+      زكريا
+     </span>
+    </div>
+   </header>
+   <section class="content">
+    <h1>
+     📷 الصور
+    </h1>
+    <div class="panel">
+     <p>
+      📷 التقط صور رحلاتك واحفظها على جهازك. تعمل الكاميرا عند استخدام HTTPS أو localhost ومنح الإذن.
+     </p>
+     <button class="btn primary" id="cameraBtn">
+      📷 فتح الكاميرا
+     </button>
+     <input accept="image/*" capture="environment" hidden="" id="fileInput" type="file"/>
+     <button class="btn" id="uploadBtn">
+      ⬆️ إضافة صورة
+     </button>
+     <div hidden="" id="cameraBox" style="margin-top:12px">
+      <video autoplay="" id="video" playsinline="" style="width:100%;max-height:420px;border-radius:16px">
+      </video>
+      <br/>
+      <button class="btn primary" id="captureBtn">
+       📸 التقاط
+      </button>
+      <button class="btn" id="closeCamera">
+       إغلاق
+      </button>
+      <canvas hidden="" id="canvas">
+      </canvas>
+     </div>
+    </div>
+    <br/>
+    <div class="grid" id="photoGrid">
+    </div>
+    <script>
+     document.addEventListener("DOMContentLoaded",()=>{
+ const grid=document.getElementById("photoGrid"), input=document.getElementById("fileInput");
+ function render(saved=[]){grid.innerHTML=allDestinations().slice(0,12).map(d=>`<article class="card"><img src="${d.img}" alt="${d.city}"><div class="cardbody"><b>${d.flag} ${d.city}</b></div></article>`).join("")+saved.map(x=>`<article class="card"><img src="${x.data}" style="width:100%;max-height:260px;object-fit:cover;border-radius:12px"><div class="cardbody"><b>📷 صور رحلاتي</b></div></article>`).join("")}
+ RahalDevice.photos().then(render).catch(()=>render([]));
+ let stream;
+ cameraBtn.onclick=async()=>{try{if(!navigator.mediaDevices?.getUserMedia)throw Error();stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"},audio:false});video.srcObject=stream;cameraBox.hidden=false}catch(e){input.click();}};
+ uploadBtn.onclick=()=>input.click();
+ input.onchange=()=>{const f=input.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>RahalDevice.savePhoto(r.result).then(()=>RahalDevice.photos()).then(render);r.readAsDataURL(f)};
+ captureBtn.onclick=()=>{canvas.width=video.videoWidth;canvas.height=video.videoHeight;canvas.getContext("2d").drawImage(video,0,0);RahalDevice.savePhoto(canvas.toDataURL("image/jpeg",.88)).then(()=>RahalDevice.photos()).then(render);RahalDevice.vibrate(30)};
+ closeCamera.onclick=()=>{stream?.getTracks().forEach(t=>t.stop());cameraBox.hidden=true};
+});
+    </script>
+   </section>
+  </main>
+ <script defer src="drawer-nav.js"></script></body>
+</html>
+

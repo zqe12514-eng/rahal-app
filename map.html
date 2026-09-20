@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head><script id="rahal-theme-early">(function(){try{var t=localStorage.getItem("rahal-theme");document.documentElement.classList.toggle("light",t==="light");}catch(e){}})();</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#0788c8" name="theme-color"/>
+<link href="manifest.json" rel="manifest"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="app.js">
+</script>
+<title>
+   الخريطة — رحّال Explorer V64.2
+  </title>
+<script src="features-v3.js">
+</script>
+<script src="auth.js"></script><script defer="" src="auth-ui.js"></script><script src="map-leaflet.js"></script><script defer src="map-loader.js"></script><style id="rahal-map-v40-style">
+:root{--map-blue:#1689e8;--map-deep:#0b4f91;--map-panel:rgba(255,255,255,.96)}
+.map-frame{position:relative;height:min(72vh,760px);min-height:520px;margin-top:12px;border-radius:28px;overflow:hidden;background:#dfeef5;box-shadow:0 18px 50px rgba(15,67,103,.18);border:1px solid rgba(80,160,220,.22)}
+.map-frame .map{height:100%!important;width:100%;margin:0;border:0;border-radius:0}
+.map-frame .leaflet-control-zoom{display:none}
+.map-frame .leaflet-container{background:#dfeef5;font-family:Tahoma,Arial,sans-serif}
+.map-frame .leaflet-tile{filter:saturate(.95) contrast(.98)}
+.map-float-panel{position:absolute;z-index:900;top:18px;right:18px;width:320px;max-height:calc(100% - 36px);overflow-y:auto;display:flex;flex-direction:column;gap:9px;padding:10px;border-radius:20px;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);box-shadow:0 12px 32px rgba(10,55,95,.18)}
+.map-tool{display:flex;align-items:center;gap:10px;justify-content:flex-start;width:100%;padding:13px 15px;border:1px solid rgba(70,145,205,.14);border-radius:14px;background:#fff;color:#153a59;font:700 14px/1.2 inherit;cursor:pointer;box-shadow:0 3px 10px rgba(30,90,130,.08)}
+.map-tool span{display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:#edf6ff;color:var(--map-blue);font-size:18px}
+.map-tool.primary{background:linear-gradient(135deg,#e7f3ff,#f8fbff);color:#104f87;border-color:#b7d9fa}
+.map-tool:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(30,90,130,.12)}
+.map-place-card-inline{position:relative!important;inset:auto!important;width:100%!important;max-width:none!important;max-height:none!important;margin:2px 0 0!important;padding:10px!important;box-shadow:0 8px 22px rgba(10,55,95,.12)!important;border-radius:15px!important}
+.map-place-card-inline .map-place-image-wrap{height:125px!important}
+.map-place-card-inline h2{font-size:18px!important;margin:7px 0 3px!important}
+.map-place-card-inline .place-country,.map-place-card-inline .coords,.map-place-card-inline .route-summary{font-size:12px!important;line-height:1.45!important;margin:4px 0!important}
+.map-place-card-inline .map-place-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important}
+.map-place-card-inline .map-place-actions .btn{padding:8px 7px!important;font-size:11px!important}
+.rahal-pick-pin{background:transparent!important;border:0!important}.rahal-pick-pin span{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#fff;box-shadow:0 3px 12px rgba(0,0,0,.2);font-size:20px}
+.map-status-card{position:absolute;z-index:900;left:18px;bottom:18px;display:flex;align-items:center;gap:9px;max-width:min(430px,calc(100% - 36px));padding:13px 17px;border-radius:17px;background:rgba(255,255,255,.95);color:#16415f;box-shadow:0 10px 28px rgba(10,55,95,.17);font-weight:700}
+.map-status-dot{width:12px;height:12px;border-radius:50%;background:#1689e8;box-shadow:0 0 0 6px rgba(22,137,232,.12);flex:none}
+.map-zoom-badge{position:absolute;z-index:900;left:18px;top:18px;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.95);box-shadow:0 8px 20px rgba(10,55,95,.16)}
+.map-zoom-badge button{width:46px;height:46px;border:0;background:#fff;color:#16415f;font-size:24px;cursor:pointer}.map-zoom-badge button+button{border-top:1px solid #e3edf4}
+.rahal-map-searchbar{position:relative;z-index:2;display:flex;gap:8px;max-width:760px;margin:0 auto 12px;padding:8px;border-radius:18px;background:rgba(255,255,255,.92);box-shadow:0 8px 25px rgba(20,70,100,.10)}
+.rahal-map-search-input{flex:1;border:0;outline:0;background:transparent;padding:12px 15px;font-size:15px}.rahal-map-searchbar .btn{border-radius:13px}
+.rahal-user-dot-icon{background:transparent!important;border:0!important}.rahal-user-dot{display:block;width:18px;height:18px;border-radius:50%;background:#1689e8;border:4px solid #fff;box-shadow:0 0 0 7px rgba(22,137,232,.20),0 2px 10px rgba(0,65,120,.32);animation:rahalPulse 1.8s infinite}
+@keyframes rahalPulse{0%,100%{box-shadow:0 0 0 5px rgba(22,137,232,.16),0 2px 10px rgba(0,65,120,.28)}50%{box-shadow:0 0 0 10px rgba(22,137,232,.05),0 2px 12px rgba(0,65,120,.22)}}
+.rahal-destination-pin{background:transparent!important;border:0!important}.rahal-destination-pin span{display:grid;place-items:center;width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#ef5350;border:3px solid #fff;box-shadow:0 3px 10px rgba(110,30,30,.28)}.rahal-destination-pin i{transform:rotate(45deg);display:block;width:7px;height:7px;border-radius:50%;background:#fff}
+@media(max-width:800px){.map-frame{height:calc(100vh - 245px);min-height:470px;border-radius:22px}.map-float-panel{top:10px;right:10px;width:280px;max-width:calc(100% - 20px);padding:7px;gap:6px}.map-tool{padding:10px 11px;font-size:12px}.map-tool span{width:26px;height:26px;font-size:15px}.map-status-card{left:10px;bottom:10px;font-size:12px;padding:11px 13px}.map-zoom-badge{left:10px;top:auto;bottom:72px}.map-zoom-badge button{width:40px;height:40px}.rahal-map-searchbar{margin-bottom:8px}}
+</style>
+<style id="rahal-v41-final-style">
+.sidebar{z-index:1003}
+.drawer-overlay{z-index:1001}
+.menu-toggle{position:relative;z-index:1004}
+.drawer-open .sidebar{box-shadow:-18px 0 55px rgba(0,0,0,.35)}
+@media(max-width:850px){.map-float-panel{width:280px;max-height:calc(100% - 20px)}.map-place-card-inline .map-place-image-wrap{height:100px!important}}
+.map-online-error{position:absolute;inset:0;z-index:1000;display:grid;place-items:center;text-align:center;padding:30px;background:rgba(255,255,255,.96);color:#16415f;font-size:18px;line-height:1.8}
+.map-online-error small{font-size:13px;font-weight:600}
+.map-frame .leaflet-container{cursor:grab}
+.map-frame .leaflet-container:active{cursor:grabbing}
+</style>
+<style id="rahal-map-entry-style">
+/* شكل الدخول المطلوب: خريطة عالمية واضحة + علامات زرقاء + تحكم تكبير/تصغير */
+.map-frame .leaflet-container{background:#dcecf3}
+.map-frame .leaflet-control-attribution{font-size:10px}
+.map-frame .map-zoom-badge{display:flex}
+@media(max-width:800px){.map-frame .map-zoom-badge{display:flex}}
+</style>
+
+<style id="rahal-map-entry-v45-style">
+.map-entry-tools{position:relative;z-index:3;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:14px auto 14px;max-width:900px}
+.map-entry-tool{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-width:185px;padding:12px 18px;border:1px solid rgba(80,150,220,.25);border-radius:15px;background:rgba(15,34,61,.92);color:#fff;font:700 14px/1.2 Tahoma,Arial,sans-serif;cursor:pointer;box-shadow:0 8px 22px rgba(5,30,60,.16);transition:.18s}
+.map-entry-tool span{font-size:19px}.map-entry-tool.primary{background:#1689e8;border-color:#1689e8}.map-entry-tool:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.map-frame{height:min(70vh,720px);min-height:500px;background:#d9edf6;border-radius:24px}
+.map-frame .leaflet-control-zoom{display:flex!important;flex-direction:column;margin:14px!important;border:0!important;border-radius:12px;overflow:hidden;box-shadow:0 5px 18px rgba(0,0,0,.18)}
+.map-frame .leaflet-control-zoom a{width:42px;height:42px;line-height:42px;background:#fff;color:#17324a;border:0!important;font-size:22px}
+.map-frame .leaflet-control-zoom a+a{border-top:1px solid #e6edf2!important}
+@media(max-width:800px){.map-entry-tools{gap:7px;margin:10px 0}.map-entry-tool{min-width:calc(50% - 6px);padding:10px 8px;font-size:12px}.map-frame{height:calc(100vh - 300px);min-height:430px;border-radius:18px}}
+</style>
+
+<style id="rahal-map-tools-side-final">
+/* إبقاء أدوات الخريطة داخل الخريطة وعلى جانب ثابت حتى لا تنزل أسفل بطاقة المكان */
+.map-frame{position:relative!important}
+.map-frame .map-entry-tools{position:absolute!important;z-index:1100!important;left:18px!important;right:auto!important;top:18px!important;width:220px!important;max-width:220px!important;margin:0!important;padding:9px!important;display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;border-radius:18px!important;background:rgba(255,255,255,.90)!important;backdrop-filter:blur(10px)!important;box-shadow:0 12px 30px rgba(10,55,95,.18)!important}
+.map-frame .map-entry-tool{min-width:0!important;width:100%!important;padding:12px 13px!important;border-radius:13px!important;font-size:13px!important;box-sizing:border-box}
+.map-frame .map-place-card{right:18px!important;left:auto!important;top:18px!important;bottom:auto!important;z-index:1090!important;width:360px!important;max-width:calc(100% - 280px)!important;max-height:calc(100% - 36px)!important;overflow-y:auto!important}
+@media(max-width:850px){
+  .map-frame .map-entry-tools{left:10px!important;top:10px!important;width:190px!important;max-width:190px!important;padding:7px!important;gap:6px!important}
+  .map-frame .map-entry-tool{padding:9px 10px!important;font-size:12px!important}
+  .map-frame .map-place-card{right:10px!important;top:10px!important;width:calc(100% - 215px)!important;max-width:none!important;max-height:calc(100% - 20px)!important}
+}
+@media(max-width:560px){
+  .map-frame .map-entry-tools{left:10px!important;right:10px!important;top:auto!important;bottom:10px!important;width:auto!important;max-width:none!important;flex-direction:row!important;flex-wrap:wrap!important;background:rgba(255,255,255,.94)!important}
+  .map-frame .map-entry-tool{width:calc(50% - 3px)!important;padding:8px 6px!important;font-size:11px!important}
+  .map-frame .map-place-card{left:10px!important;right:10px!important;top:10px!important;width:auto!important;max-width:none!important;max-height:52%!important}
+}
+
+.map-pick-hint{position:absolute;left:50%;top:18px;transform:translateX(-50%);z-index:1200;background:#fff;border:2px solid #1689e8;color:#123b5d;border-radius:14px;padding:10px 16px;box-shadow:0 8px 24px rgba(10,55,95,.2);font-weight:700;pointer-events:none}.map-pick-hint[hidden]{display:none}
+@media(max-width:800px){.map-pick-hint{top:12px;max-width:80%;text-align:center;font-size:12px}}
+</style>
+<style id="rahal-v60-map-fix">
+.map-place-card .map-place-image-wrap{background:#eaf4f8!important}.map-place-card .map-place-image{object-fit:cover!important}.map-place-card .map-place-fallback{color:#17324a;background:#eaf4f8}.map-place-card h2{font-weight:800}.map-place-card .place-country{font-weight:700;color:#587087}
+</style>
+<style id="rahal-v64-map-entry-final">
+/* V64: map opens immediately as a clean, world-first view like the reference. */
+.map-page-shell{margin-top:0!important}
+.map-frame{height:calc(100vh - 205px)!important;min-height:560px!important;margin-top:8px!important;border-radius:18px!important}
+.map-entry-tools{position:absolute!important;left:14px!important;right:14px!important;top:14px!important;width:auto!important;max-width:none!important;flex-direction:row!important;flex-wrap:wrap!important;background:rgba(255,255,255,.92)!important}
+.map-frame .map-entry-tool{width:auto!important;flex:1 1 170px!important}
+@media(max-width:800px){.map-frame{height:calc(100vh - 250px)!important;min-height:430px!important}.map-entry-tools{left:8px!important;right:8px!important;top:8px!important}.map-frame .map-entry-tool{flex:1 1 calc(50% - 6px)!important}}
+</style>
+
+<style id="rahal-v65-destination-tools-final">
+/* V65.1: compact destination controls; preserve all existing map assets/scripts. */
+.map-frame .map-entry-tools{position:absolute!important;z-index:1100!important;top:16px!important;left:16px!important;right:auto!important;width:auto!important;max-width:calc(100% - 32px)!important;margin:0!important;padding:7px!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:7px!important;border-radius:16px!important;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(12px)!important;box-shadow:0 8px 24px rgba(10,55,95,.16)!important;border:1px solid rgba(90,150,200,.16)!important}
+.map-frame .map-entry-tool{flex:0 0 auto!important;width:auto!important;min-width:132px!important;height:44px!important;padding:8px 13px!important;border:1px solid #d9e8f3!important;border-radius:11px!important;background:#fff!important;color:#153a59!important;box-shadow:0 2px 7px rgba(20,80,120,.07)!important;font-size:13px!important;white-space:nowrap!important;transition:transform .16s ease,box-shadow .16s ease,background .16s ease!important}
+.map-frame .map-entry-tool.primary{background:#1689e8!important;color:#fff!important;border-color:#1689e8!important}
+.map-frame .map-entry-tool:hover{transform:translateY(-1px)!important;box-shadow:0 5px 13px rgba(20,80,120,.13)!important}
+.map-frame .map-entry-tool span{font-size:16px!important;margin-inline-end:5px!important}
+@media(max-width:850px){.map-frame .map-entry-tools{top:10px!important;left:10px!important;right:10px!important;max-width:none!important;overflow-x:auto!important;scrollbar-width:none!important;padding:6px!important}.map-frame .map-entry-tools::-webkit-scrollbar{display:none}.map-frame .map-entry-tool{min-width:118px!important;height:40px!important;padding:7px 10px!important;font-size:12px!important}}
+@media(max-width:560px){.map-frame .map-entry-tools{top:8px!important;left:8px!important;right:8px!important;gap:5px!important}.map-frame .map-entry-tool{min-width:108px!important;height:38px!important;font-size:11px!important}}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+<div class="brand">
+<div class="logo">
+     🧭
+    </div>
+<div>
+<h2>
+      رحّال Explorer
+     </h2>
+<small>
+      منصة السفر الذكية
+     </small>
+</div>
+</div>
+<nav class="nav">
+<a class="" href="index.html">
+<i>
+      ⌂
+     </i>
+<span>
+      الرئيسية
+     </span>
+</a>
+<a class="active" href="map.html">
+<i>
+      ⌖
+     </i>
+<span>
+      الخريطة
+     </span>
+</a>
+<a class="" href="places.html">
+<i>
+      ◉
+     </i>
+<span>
+      المواقع السياحية
+     </span>
+</a>
+<a class="" href="trips.html">
+<i>
+      ✈
+     </i>
+<span>
+      رحلاتي
+     </span>
+</a>
+<a class="" href="favorites.html">
+<i>
+      ♡
+     </i>
+<span>
+      المفضلة
+     </span>
+</a>
+<a class="" href="photos.html">
+<i>
+      ▧
+     </i>
+<span>
+      الصور
+     </span>
+</a>
+<a class="" href="statistics.html">
+<i>
+      ▥
+     </i>
+<span>
+      الإحصائيات
+     </span>
+</a>
+<a class="" href="settings.html">
+<i>
+      ⚙
+     </i>
+<span>
+      الإعدادات
+     </span>
+</a>
+<a class="" href="admin.html">
+<i>
+      ⚡
+     </i>
+<span>
+      الإدارة
+     </span>
+</a>
+</nav>
+</aside>
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<main class="main">
+<header class="topbar"><button aria-expanded="false" aria-label="فتح القائمة" class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button><a aria-label="الحساب" class="account-avatar-btn" data-account-link="" href="profile.html" title="الحساب"><span data-account-avatar="">👤</span></a>
+<input class="search" data-search="" placeholder="ابحث عن مدينة أو وجهة..."/>
+<div class="actions">
+<button class="circle" id="themeBtn">
+      ☼
+     </button>
+<button class="circle" id="notifyBtn">
+      🔔
+     </button>
+<span>
+      زكريا
+     </span>
+</div>
+</header>
+<section class="content map-page-shell">
+<h1>
+     🗺️ خريطة الوجهات
+    </h1>
+<p class="muted">ابحث عن مدينة أو وجهة، حرّك الخريطة، حدّد موقعك أو اختر الأقرب لموقعك. يظهر المسار والاتجاهات فقط مع «الأقرب لموقعي».</p>
+<div class="rahal-map-searchbar" id="rahalMapSearchWrap"><div class="google-map-search-host" id="googleMapSearch"></div><input autocomplete="off" class="rahal-map-search-input" id="rahalMapSearchFallback" placeholder="ابحث عن مدينة أو وجهة أو معلم مثل باريس..." type="search"/><button class="btn primary" id="rahalMapSearchBtn" type="button">🔎 بحث</button></div>
+<div class="map-frame" id="mapFrame">
+  <div class="map-entry-tools" aria-label="أدوات الخريطة">
+    <button class="map-entry-tool primary" id="myLocationBtn" type="button"><span>⌖</span><b>تحديد موقعي</b></button>
+    <button class="map-entry-tool" id="resetMapBtn" type="button"><span>🌍</span><b>عرض جميع الوجهات</b></button>
+    <button class="map-entry-tool" id="nearbyBtn" type="button"><span>★</span><b>الأقرب لموقعي</b></button>
+    <button class="map-entry-tool" id="pickBtn" type="button"><span>📍</span><b>اختر وجهة</b></button>
+  </div>
+  <div class="map" id="map"></div><div id="pickHint" class="map-pick-hint" hidden>📌 اضغط مرة واحدة على أي نقطة في الخريطة لاختيارها</div>
+  <div class="map-status-card" id="mapStatusCard"><span class="map-status-dot"></span><span aria-live="polite" id="locationStatus">جاهز — اختر موقعًا أو حدد موقعك</span></div>
+  <div class="map-zoom-badge" aria-label="التكبير والتصغير"><button type="button" aria-label="تكبير">+</button><button type="button" aria-label="تصغير">−</button></div>
+</div>
+
+
+
+</section>
+</main>
+<script defer="" src="drawer-nav.js"></script><script id="rahal-map-size-fix">
+(function(){
+  function refresh(){try{if(window.m&&typeof m.invalidateSize==='function')m.invalidateSize(true)}catch(e){}}
+  window.addEventListener('load',refresh); window.addEventListener('resize',refresh); window.addEventListener('pageshow',refresh);
+  [120,700].forEach(function(ms){setTimeout(refresh,ms)});
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')requestAnimationFrame(refresh)});
+})();
+</script>
+</body>
+</html>

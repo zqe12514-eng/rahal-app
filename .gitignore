@@ -1,0 +1,27 @@
+# VS Code
+.vscode/
+
+# System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Env / secrets
+.env
+
+# Logs
+*.log# VS Code settings
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Env / secrets
+.env
+
+# Logs
+*.log
+
+# Optional: اترك ملفات README-V*.md إذا أردت الاحتفاظ بتاريخ الإصدارات

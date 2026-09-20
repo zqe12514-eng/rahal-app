@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+ <head><script id="rahal-theme-early">(function(){try{var t=localStorage.getItem("rahal-theme");document.documentElement.classList.toggle("light",t==="light");}catch(e){}})();</script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="#0788c8" name="theme-color"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="style.css" rel="stylesheet"/>
+  <script defer="" src="app.js">
+  </script>
+  <title>
+   الإدارة — رحّال Explorer
+  </title>
+  <script src="features-v3.js">
+  </script>
+ <script src="auth.js"></script><script defer src="auth-ui.js"></script></head>
+ <body>
+<aside class="sidebar">
+   <div class="brand">
+    <div class="logo">
+     🧭
+    </div>
+    <div>
+     <h2>
+      رحّال Explorer
+     </h2>
+     <small>
+      منصة السفر الذكية
+     </small>
+    </div>
+   </div>
+   <nav class="nav">
+    <a class="" href="index.html">
+     <i>
+      ⌂
+     </i>
+     <span>
+      الرئيسية
+     </span>
+    </a>
+    <a class="" href="map.html">
+     <i>
+      ⌖
+     </i>
+     <span>
+      الخريطة
+     </span>
+    </a>
+    <a class="" href="places.html">
+     <i>
+      ◉
+     </i>
+     <span>
+      المواقع السياحية
+     </span>
+    </a>
+    <a class="" href="trips.html">
+     <i>
+      ✈
+     </i>
+     <span>
+      رحلاتي
+     </span>
+    </a>
+    <a class="" href="favorites.html">
+     <i>
+      ♡
+     </i>
+     <span>
+      المفضلة
+     </span>
+    </a>
+    <a class="" href="photos.html">
+     <i>
+      ▧
+     </i>
+     <span>
+      الصور
+     </span>
+    </a>
+    <a class="" href="statistics.html">
+     <i>
+      ▥
+     </i>
+     <span>
+      الإحصائيات
+     </span>
+    </a>
+    <a class="" href="settings.html">
+     <i>
+      ⚙
+     </i>
+     <span>
+      الإعدادات
+     </span>
+    </a>
+    <a class="active" href="admin.html">
+     <i>
+      ⚡
+     </i>
+     <span>
+      الإدارة
+     </span>
+    </a>
+   </nav>
+  </aside>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <main class="main">
+   <header class="topbar"><button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button><a class="account-avatar-btn" data-account-link href="profile.html" aria-label="الحساب" title="الحساب"><span data-account-avatar>👤</span></a>
+    <input class="search" data-search="" placeholder="ابحث عن مدينة أو وجهة..."/>
+    <div class="actions">
+     <button class="circle" id="themeBtn">
+      ☼
+     </button>
+     <button class="circle" id="notifyBtn">
+      🔔
+     </button>
+     <span>
+      زكريا
+     </span>
+    </div>
+   </header>
+   <section class="content">
+    <div class="admin-hero"><div><h1>⚡ إدارة رحّال</h1><p>إدارة الوجهات والبيانات والنسخ الاحتياطية من مكان واحد.</p></div><div class="admin-actions"><button class="btn primary" id="exportBtn">💾 تصدير بيانات رحّال</button></div></div>
+    <div class="admin-grid">
+      <div class="admin-card"><span class="admin-icon">📍</span><small>الوجهات المتاحة</small><b id="adminDestinationCount">—</b></div>
+      <div class="admin-card"><span class="admin-icon">➕</span><small>وجهات مضافة محليًا</small><b id="adminCustomCount">—</b></div>
+      <div class="admin-card"><span class="admin-icon">💾</span><small>النسخ الاحتياطية</small><b>محلي</b></div>
+    </div>
+    <div class="admin-section-title"><h2>➕ إضافة وجهة</h2><span class="admin-help">أضف مدينة أو موقعًا سياحيًا إلى رحّال</span></div>
+    <div class="admin-form-card"><div class="admin-form-head"><div class="admin-icon">📍</div><div><b>بيانات الوجهة</b><div class="muted">الاسم والموقع والوصف والصورة</div></div></div>
+      <form class="form-grid" id="destinationForm">
+        <input name="city" placeholder="اسم المدينة بالعربي" required/><input name="en" placeholder="English name"/>
+        <input name="country" placeholder="الدولة" required/><input name="flag" placeholder="العلم 🇾🇪"/>
+        <input name="lat" placeholder="Latitude" required step="any" type="number"/><input name="lng" placeholder="Longitude" required step="any" type="number"/>
+        <input name="cat" placeholder="التصنيف (تاريخي، طبيعي...)" required/><input max="5" min="1" name="rating" placeholder="التقييم" step="0.1" type="number" value="4.5"/>
+        <input class="wide" name="img" placeholder="رابط صورة الوجهة"/><textarea class="wide" name="desc" placeholder="وصف مختصر للوجهة" required></textarea>
+        <button class="btn primary wide" type="submit">➕ إضافة الوجهة</button>
+      </form>
+    </div>
+    <div class="admin-section-title"><h2>💾 النسخ الاحتياطية</h2><span class="admin-help">احفظ بيانات رحّال أو استعدها على هذا الجهاز</span></div>
+    <div class="panel"><div class="admin-actions"><button class="btn primary" id="exportBtn2" type="button">⬇️ تصدير نسخة احتياطية</button><label class="btn" for="importInput">⬆️ استيراد نسخة احتياطية</label><input accept=".json" id="importInput" type="file" style="display:none"/></div><div class="admin-danger-note">النسخة الاحتياطية ملف JSON محلي. احتفظ به في مكان آمن، ولا تشاركه إذا كان يحتوي على بيانات شخصية.</div></div>
+    <div class="admin-section-title"><h2>📋 الوجهات الحالية</h2><span class="admin-help">يمكنك تعديل أو حذف الوجهات التي أضفتها أنت، أما الوجهات الأساسية فتظل محفوظة داخل رحّال</span></div>
+    <div class="panel admin-table-card"><div class="table-wrap"><table class="admin-table"><thead><tr><th>الوجهة</th><th>الدولة</th><th>التصنيف</th><th>التقييم</th><th>المصدر</th><th>إجراء</th></tr></thead><tbody id="adminRows"></tbody></table></div></div>
+   </section>
+  </main>
+ <script defer src="drawer-nav.js"></script></body>
+</html>
+
